@@ -1,15 +1,14 @@
-import { AuthModalState, authModalState } from "@/src/atoms/authModalAtom";
-import { Button, Flex, Input, Text } from "@chakra-ui/react";
+import { authModalState } from "@/src/atoms/authModalAtom";
+import { Input, Button, Flex, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { RecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
-type LoginProps = {};
-
-const Login: React.FC<LoginProps> = () => {
+const SignUp: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
-  const [loginForm, setLoginForm] = useState({
+  const [signUpForm, setSignUpForm] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   // Firebase logic
@@ -17,7 +16,7 @@ const Login: React.FC<LoginProps> = () => {
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // update form state
-    setLoginForm((prev) => ({
+    setSignUpForm((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
     }));
@@ -69,27 +68,48 @@ const Login: React.FC<LoginProps> = () => {
         }}
         bg="gray.50"
       />
+      <Input
+        required
+        name="confirmPassword"
+        placeholder="confirm password"
+        type="password"
+        mb={2}
+        onChange={onChange}
+        fontSize="10pt"
+        _placeholder={{ color: "gray.500" }}
+        _hover={{
+          bg: "white",
+          border: "1px solid",
+          borderColor: "blue.500",
+        }}
+        _focus={{
+          outline: "none",
+          bg: "white",
+          border: "1px solid",
+          borderColor: "blue.500",
+        }}
+        bg="gray.50"
+      />
       <Button width="100%" height="36px" mt={2} mb={2} type="submit">
-        Login In
+        Sign Up
       </Button>
       <Flex fontSize="9pt" justifyContent="center">
-        <Text mr={1}>New Here?</Text>
+        <Text mr={1}>Already a redditor?</Text>
         <Text
           color="blue.500"
           fontWeight={700}
           cursor="pointer"
-          onClick={() => setAuthModalState((prev) => ({
-            ...prev,
-            view: 'signup',
-          }))}
+          onClick={() =>
+            setAuthModalState((prev) => ({
+              ...prev,
+              view: "login",
+            }))
+          }
         >
-          SIGN UP
+          LOG IN
         </Text>
       </Flex>
     </form>
   );
 };
-export default Login;
-function useStateRecoilState(authModalState: RecoilState<AuthModalState>) {
-  throw new Error("Function not implemented.");
-}
+export default SignUp;
