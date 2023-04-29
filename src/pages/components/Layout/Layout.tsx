@@ -2,7 +2,8 @@ import React from 'react'
 import Navbar from '../Navbar/Navbar'
 
 
-export default function Layout({ children }) {
+const Layout:React.FC = ({ children }) => {
+  
   return (
     <>
       <Navbar />
@@ -10,3 +11,4 @@ export default function Layout({ children }) {
     </>
   )
 }
+export default Layout;
