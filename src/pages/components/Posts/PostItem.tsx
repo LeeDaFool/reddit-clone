@@ -1,7 +1,7 @@
 import { Post } from "@/src/atoms/postAtom";
-import { Flex, Icon, Image, Stack, Text } from "@chakra-ui/react";
+import { Flex, Icon, Image, Skeleton, Stack, Text } from "@chakra-ui/react";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsChat, BsDot } from "react-icons/bs";
 import { FaReddit } from "react-icons/fa";
@@ -31,6 +31,7 @@ const PostItem: React.FC<PostItemProps> = ({
   onDeletePost,
   onSelectPost,
 }) => {
+  const [loadingImage, setLoadingImage] = useState(true);
   return (
     <Flex
       border="1px solid"
@@ -86,7 +87,16 @@ const PostItem: React.FC<PostItemProps> = ({
           <Text fontSize="10pt">{post.body}</Text>
           {post.imageURL && (
             <Flex justify="center" align="center" p={2}>
-              <Image src={post.imageURL} maxHeight="460px" alt="Post Image" />
+              {loadingImage && (
+                <Skeleton height="200px" width="100%" borderRadius={4} />
+              )}
+              <Image
+                src={post.imageURL}
+                maxHeight="460px"
+                alt="Post Image"
+                display={loadingImage ? 'none' : 'unset'}
+                onLoad={() => setLoadingImage(false)}
+              />
             </Flex>
           )}
         </Stack>
@@ -121,17 +131,19 @@ const PostItem: React.FC<PostItemProps> = ({
             <Icon as={IoBookmarkOutline} mr={2} />
             <Text fontSize="9pt">Save</Text>
           </Flex>
-          {userIsCreator && <Flex
-            align="center"
-            p="8px 10px"
-            borderRadius={4}
-            _hover={{ bg: "gray.200" }}
-            cursor="pointer"
-            onClick={onDeletePost}
-          >
-            <Icon as={AiOutlineDelete} mr={2} />
-            <Text fontSize="9pt">Delete</Text>
-          </Flex>}
+          {userIsCreator && (
+            <Flex
+              align="center"
+              p="8px 10px"
+              borderRadius={4}
+              _hover={{ bg: "gray.200" }}
+              cursor="pointer"
+              onClick={onDeletePost}
+            >
+              <Icon as={AiOutlineDelete} mr={2} />
+              <Text fontSize="9pt">Delete</Text>
+            </Flex>
+          )}
         </Flex>
       </Flex>
     </Flex>
