@@ -4,9 +4,17 @@ import { Box, Text } from "@chakra-ui/react";
 import NewPostForm from "../../components/Posts/NewPostForm";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/src/firebase/clientApp";
+import { useRecoilValue } from "recoil";
+import { communityState } from "@/src/atoms/communitiesAtoms";
+import useCommunityData from "@/src/hooks/useCommunityData";
+import About from "../../components/Community/About";
 
 const SubmitPostPage: React.FC = () => {
   const [user] = useAuthState(auth);
+  // const communityStateValue = useRecoilValue(communityState);
+  const { communityStateValue } = useCommunityData();
+  console.log("COMMUNITY", communityStateValue);
+
   return (
     <PageContent>
       <>
@@ -15,7 +23,11 @@ const SubmitPostPage: React.FC = () => {
         </Box>
         {user && <NewPostForm user={user} />}
       </>
-      <>{/* About */}</>
+      <>
+        {communityStateValue.currentCommunity && (
+          <About communityData={communityStateValue.currentCommunity} />
+        )}
+      </>
     </PageContent>
   );
 };
