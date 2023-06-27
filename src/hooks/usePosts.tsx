@@ -55,7 +55,7 @@ const usePosts = () => {
       if (!existingVote) {
         // create a new postVote document
         const postVoteRef = doc(
-          collection(firestore, "users", `${user?.uid}/postVotes`)
+          collection(firestore, "users", `${user.uid}/postVotes`)
         );
 
         const newVote: PostVote = {
@@ -75,8 +75,8 @@ const usePosts = () => {
       else {
         const postVoteRef = doc(
           firestore,
-          "user",
-          `${user?.uid}/postVotes/${existingVote.id}`
+          "users",
+          `${user.uid}/postVotes/${existingVote.id}`
         );
 
         // Removing their vote (up => neutral OR down => neutral)
@@ -122,7 +122,7 @@ const usePosts = () => {
       const postIdx = postStateValue.posts.findIndex(
         (item) => item.id === post.id
       );
-      updatedPosts[postIdx] = updatedPost;
+      updatedPosts[postIdx!] = updatedPost;
       setPostStateValue((prev) => ({
         ...prev,
         posts: updatedPosts,
@@ -145,7 +145,7 @@ const usePosts = () => {
     }
   };
 
-  const onSelectPost = (post: Post) => {
+  const onSelectPost = (post: Post, ) => {
     setPostStateValue((prev) => ({
       ...prev,
       selectedPost: post,

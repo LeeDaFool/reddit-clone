@@ -5,7 +5,7 @@ export interface Community {
   id: string;
   creatorId: string;
   numberOfMembers: number;
-  privacyType: 'public' | 'restriced' | 'private';
+  privacyType: "public" | "restriced" | "private";
   createdAt?: Timestamp;
   imageURL?: string;
 }
@@ -19,13 +19,15 @@ export interface CommunitySnippets {
 interface CommunityState {
   mySnippets: CommunitySnippets[];
   currentCommunity?: Community;
+  snippetsFetched: boolean;
 }
 
 const defaultCommuintyState: CommunityState = {
-  mySnippets: []
-}
+  mySnippets: [],
+  snippetsFetched: false,
+};
 
 export const communityState = atom<CommunityState>({
-  key: 'communitiesState',
-  default: defaultCommuintyState
-})
+  key: "communitiesState",
+  default: defaultCommuintyState,
+});
