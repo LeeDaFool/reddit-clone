@@ -10,7 +10,7 @@ export type ModalView = "login" | "signup" | "resetPassword";
 const defaultModalState: AuthModalState = {
   open: false,
   view: "login",
-};
+}; 
 
 export const authModalState = atom<AuthModalState>({
   key: "authModalState",
