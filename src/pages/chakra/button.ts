@@ -1,4 +1,4 @@
-import { ComponentStyleConfig } from "@chakra-ui/theme";
+import type { ComponentStyleConfig } from "@chakra-ui/theme";
 
 export const Button: ComponentStyleConfig = {
   baseStyle: {
@@ -41,3 +41,5 @@ export const Button: ComponentStyleConfig = {
     },
   },
 };
+
+export default Button;

@@ -26,3 +26,5 @@ export const theme = extendTheme({
     Button,
   }
 });
+
+export default theme;
