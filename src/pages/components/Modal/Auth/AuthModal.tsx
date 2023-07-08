@@ -23,7 +23,7 @@ import ResetPassword from "./ResetPassword";
 
 const AuthModal: React.FC = () => {
   const [modalState, setModalState] = useRecoilState(authModalState);
-  const [user, loading, error] = useAuthState(auth)
+  const [user, loading, error] = useAuthState(auth);
 
   const handleClose = () => {
     setModalState((prev) => ({
@@ -32,9 +32,16 @@ const AuthModal: React.FC = () => {
     }));
   };
 
+  const toggleView = (view: string) => {
+    setModalState({
+      ...modalState,
+      view: view as typeof modalState.view,
+    });
+  };
+
   useEffect(() => {
-    if(user) handleClose();
-    console.log('user', user);
+    if (user) handleClose();
+    console.log("user", user);
   }, [user]);
 
   return (
@@ -42,7 +49,7 @@ const AuthModal: React.FC = () => {
       <Modal isOpen={modalState.open} onClose={handleClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader textAlign='center'>
+          <ModalHeader textAlign="center">
             {modalState.view === "login" && "Login"}
             {modalState.view === "signup" && "Sign Up"}
             {modalState.view === "resetPassword" && "Reset Password"}
@@ -61,13 +68,17 @@ const AuthModal: React.FC = () => {
               justify="center"
               width="70%"
             >
-              {modalState.view === 'login' || modalState.view === 'signup' ? (
+              {modalState.view === "login" || modalState.view === "signup" ? (
                 <>
-              <OAuthButtons/>
-              <Text color='gray.500' fontWeight={700}>OR</Text>
-              <AuthInputs />
-              </>
-              ) : <ResetPassword />}
+                  <OAuthButtons />
+                  <Text color="gray.500" fontWeight={700}>
+                    OR
+                  </Text>
+                  <AuthInputs />
+                </>
+              ) : (
+                <ResetPassword toggleView={toggleView} />
+              )}
             </Flex>
           </ModalBody>
         </ModalContent>
