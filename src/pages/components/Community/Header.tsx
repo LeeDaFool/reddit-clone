@@ -4,6 +4,7 @@ import React from "react";
 import { FaReddit } from "react-icons/fa";
 import useCommunityData from "@/src/hooks/useCommunityData";
 
+
 type HeaderProps = {
   communityData: Community;
 };
