@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import PageContent from "./components/Layout/PageContent";
+import PageContent from "@/src/components/Layout/PageContent";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, firestore } from "../firebase/clientApp";
 import { useEffect, useState } from "react";
@@ -15,14 +15,14 @@ import {
 } from "firebase/firestore";
 import usePosts from "../hooks/usePosts";
 import { Post, PostVote } from "../atoms/postAtom";
-import PostLoader from "./components/Posts/PostLoader";
+import PostLoader from "@/src/components/Posts/PostLoader";
 import { Stack } from "@chakra-ui/react";
-import PostItem from "./components/Posts/PostItem";
-import CreatePostLink from "./components/Community/CreatePostLink";
+import PostItem from "@/src/components/Posts/PostItem";
+import CreatePostLink from "@/src/components/Community/CreatePostLink";
 import useCommunityData from "../hooks/useCommunityData";
-import Recommendations from "./components/Community/Recommendations";
-import Premium from "./components/Community/Premium";
-import PersonalHome from "./components/Community/PersonalHome";
+import Recommendations from "@/src/components/Community/Recommendations";
+import Premium from "@/src/components/Community/Premium";
+import PersonalHome from "@/src/components/Community/PersonalHome";
 
 const Home: NextPage = () => {
   const [user, loadingUser] = useAuthState(auth);
