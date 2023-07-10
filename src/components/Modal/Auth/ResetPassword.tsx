@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Button, Flex, Icon, Input, Text } from "@chakra-ui/react";
 import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 import { BsDot, BsReddit } from "react-icons/bs";
-import { authModalState, ModalView } from "../../../../atoms/authModalAtom";
-import { auth } from "../../../../firebase/clientApp";
+import { authModalState, ModalView } from "../../../atoms/authModalAtom";
+import { auth } from "../../../firebase/clientApp";
 import { useSetRecoilState } from "recoil";
 
 type ResetPasswordProps = {
