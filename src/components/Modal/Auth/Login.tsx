@@ -3,7 +3,7 @@ import { Button, Flex, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { RecoilState, useSetRecoilState } from "recoil";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth } from "../../../../firebase/clientApp";
+import { auth } from "../../../firebase/clientApp";
 import { FIREBASE_ERRORS } from "@/src/firebase/errors";
 
 type LoginProps = {};
